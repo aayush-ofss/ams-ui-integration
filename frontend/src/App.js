@@ -8,8 +8,6 @@ const accent = "#2458ed";
 
 function App() {
   const [workspace, setWorkspace] = useState("AMS AI");
-  const [provider, setProvider] = useState("OpenAI");
-  const [model, setModel] = useState("gpt5");
   const [file, setFile] = useState(null);
   const [prompt, setPrompt] = useState("");
   const [output, setOutput] = useState("");
@@ -45,7 +43,7 @@ function App() {
       color: "#fff",
       fontFamily: "Segoe UI, Arial, sans-serif"
     }}>
-      <h2 style={{ fontWeight: 600, marginBottom: 12 }}>Workspace Runner</h2>
+      <h2 style={{ fontWeight: 600, marginBottom: 12 }}>GURU</h2>
       <div style={{ display: "flex", gap: 20 }}>
         {/* Left controls */}
         <div style={{
@@ -60,24 +58,11 @@ function App() {
           <div style={{ marginBottom: 10 }}>
             <label>Workspace</label>
             <select style={selectStyle} value={workspace} onChange={e => setWorkspace(e.target.value)}>
-              <option>AMS AI</option>
+              <option>LBG</option>
+              <option>TD</option>
               {/* Add more options as needed */}
             </select>
             <button style={{ ...btnStyle, marginLeft: 8 }}>Refresh</button>
-          </div>
-          <div style={{ marginBottom: 10 }}>
-            <label>Provider</label>
-            <select style={selectStyle} value={provider} onChange={e => setProvider(e.target.value)}>
-              <option>OpenAI</option>
-              {/* Add more providers */}
-            </select>
-          </div>
-          <div style={{ marginBottom: 10 }}>
-            <label>Model</label>
-            <input style={inputStyle} value={model} onChange={e => setModel(e.target.value)} />
-            <div style={{ fontSize: 12, color: "#bbb" }}>
-              Set OPENAI_API_KEY as an environment variable before starting the server
-            </div>
           </div>
           <div style={{ marginBottom: 10 }}>
             <label>Attachment (optional)</label>
