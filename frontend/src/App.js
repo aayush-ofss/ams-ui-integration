@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useRef, useState, useEffect } from "react";
 
 const darkBg = "#1e2130";
@@ -6,9 +5,16 @@ const boxBg = "#26283a";
 const border = "1px solid #3a3b4d";
 const accent = "#2458ed";
 
+// Default files per branch
+const defaultFiles = {
+  LBG: ["/default_logs/LBG/log1.txt", "/default_logs/LBG/log2.txt"],
+  TD: ["/default_logs/TD/logA.txt", "/default_logs/TD/logB.txt"]
+};
+
 function App() {
-  const [workspace, setWorkspace] = useState("AMS AI");
+  const [workspace, setWorkspace] = useState("LBG");
   const [file, setFile] = useState(null);
+  const [uploadedFiles, setUploadedFiles] = useState([]);
   const [prompt, setPrompt] = useState("");
   const [output, setOutput] = useState("");
   const ws = useRef(null);
@@ -35,6 +41,10 @@ function App() {
     setOutput("");
   };
 
+  const handleFileUpload = (e) => {
+    setUploadedFiles(Array.from(e.target.files));
+  };
+
   return (
     <div style={{
       minHeight: "100vh",
@@ -55,22 +65,38 @@ function App() {
           minWidth: 350,
           maxWidth: 470,
         }}>
+          {/* Workspace selection */}
           <div style={{ marginBottom: 10 }}>
             <label>Workspace</label>
             <select style={selectStyle} value={workspace} onChange={e => setWorkspace(e.target.value)}>
               <option>LBG</option>
               <option>TD</option>
-              {/* Add more options as needed */}
             </select>
             <button style={{ ...btnStyle, marginLeft: 8 }}>Refresh</button>
           </div>
+
+          {/* Default files */}
+          <div style={{ marginBottom: 10 }}>
+            <h4>Default Files in {workspace}:</h4>
+            <ul>
+              {defaultFiles[workspace].map((f, i) => (
+                <li key={i}>
+                  <a href={f} target="_blank" rel="noopener noreferrer">{f.split("/").pop()}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Upload new log files */}
           <div style={{ marginBottom: 10 }}>
             <label>Upload log files</label>
-            <input type="file"
-              style={{ color: "#fff" }}
-              onChange={e => setFile(e.target.files[0])}
-            />
+            <input type="file" multiple style={{ color: "#fff" }} onChange={handleFileUpload} />
+            <ul>
+              {uploadedFiles.map((f, i) => <li key={i}>{f.name}</li>)}
+            </ul>
           </div>
+
+          {/* Prompt input */}
           <div style={{ marginBottom: 10 }}>
             <label>Prompt</label>
             <textarea
@@ -87,6 +113,7 @@ function App() {
             </div>
           </div>
         </div>
+
         {/* Right output */}
         <div style={{
           background: boxBg,
@@ -103,6 +130,7 @@ function App() {
           }}>{output || "Waiting for response..."}</div>
         </div>
       </div>
+
       {/* Optional: History section */}
       <div style={{
         marginTop: 32,
@@ -113,7 +141,6 @@ function App() {
         maxWidth: 600
       }}>
         <div style={{ fontWeight: 600 }}>History</div>
-        {/* Add history handling here if needed */}
         <button style={btnStyle}>Refresh</button>
       </div>
     </div>
