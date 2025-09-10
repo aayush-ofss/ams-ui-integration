@@ -7,9 +7,9 @@ const accent = "#2458ed";
 
 // Default files per branch
 const defaultFiles = {
-  LBG: ["/default_logs/LBG/log1.txt", "/default_logs/LBG/log2.txt"],
-  TD: ["/default_logs/TD/logA.txt", "/default_logs/TD/logB.txt"]
-};
+  LBG: "/L",
+  // TD: "/default_logs/TD"
+}
 
 function App() {
   const [workspace, setWorkspace] = useState("LBG");
