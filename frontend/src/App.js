@@ -8,8 +8,8 @@ const accent = "#2458ed";
 
 // Default folders per branch (pointing to directories)
 const defaultFolders = {
-  LBG: "/default_logs/LBG/",
-  TD: "/default_logs/TD/"
+  LBG: "/Lloyds banking Group",
+  // TD: "/default_logs/TD/"
 };
 
 function App() {
