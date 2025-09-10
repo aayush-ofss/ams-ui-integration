@@ -65,7 +65,7 @@ function App() {
             <button style={{ ...btnStyle, marginLeft: 8 }}>Refresh</button>
           </div>
           <div style={{ marginBottom: 10 }}>
-            <label>Attachment (optional)</label>
+            <label>Upload log files</label>
             <input type="file"
               style={{ color: "#fff" }}
               onChange={e => setFile(e.target.files[0])}
